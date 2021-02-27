@@ -15,6 +15,8 @@ namespace AzChallangeCalicotApi
 {
     public class Startup
     {
+        private AppSettings _config;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +27,9 @@ namespace AzChallangeCalicotApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            _config = new AppSettings();
+            Configuration.Bind("AppSettings", _config);
+
             services.AddControllers();
             services.AddCors();
         }
@@ -40,7 +45,7 @@ namespace AzChallangeCalicotApi
             app.UseHttpsRedirection();
 
             app.UseCors(option =>
-            option.WithOrigins("http://localhost:4200/")
+            option.WithOrigins(_config.AngularUrl)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowAnyOrigin());
