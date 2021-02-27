@@ -15,7 +15,7 @@ namespace AzChallangeCalicotApi.Controllers
         public ActionResult<List<Models.Product>> GetAllProducts()
         {
             var _productService = new services.ProductService();
-            return _productService.GetProducts();
+            return Ok( _productService.GetProducts());
         }
 
         [HttpPost]
