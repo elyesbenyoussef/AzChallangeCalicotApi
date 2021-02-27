@@ -26,6 +26,7 @@ namespace AzChallangeCalicotApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +38,13 @@ namespace AzChallangeCalicotApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(option =>
+            option.WithOrigins("http://localhost:4200/")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowAnyOrigin());
+                
 
             app.UseRouting();
 
