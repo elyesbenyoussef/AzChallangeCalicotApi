@@ -12,7 +12,7 @@ namespace AzChallangeCalicotApi.Controllers
     public class CollectionController : ControllerBase
     {
         [HttpGet("all")]
-        public List<Models.Product> GetAllProducts()
+        public ActionResult<List<Models.Product>> GetAllProducts()
         {
             var _productService = new services.ProductService();
             return _productService.GetProducts();
