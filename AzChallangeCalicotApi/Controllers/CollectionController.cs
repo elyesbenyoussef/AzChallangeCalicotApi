@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AzChallangeCalicotApi.Base;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AzChallangeCalicotApi.Controllers
 {
@@ -12,10 +9,10 @@ namespace AzChallangeCalicotApi.Controllers
     public class CollectionController : ControllerBase
     {
         [HttpGet("all")]
-        public ActionResult<List<Models.Product>> GetAllProducts()
+        public ActionResult<EnveloppeReponse<List<Models.Product>>> GetAllProducts()
         {
             var _productService = new services.ProductService();
-            return new OkObjectResult( _productService.GetProducts());
+            return new OkObjectResult(new EnveloppeReponse<List<Models.Product>>() { Data = _productService.GetProducts() });
         }
 
         [HttpPost]
