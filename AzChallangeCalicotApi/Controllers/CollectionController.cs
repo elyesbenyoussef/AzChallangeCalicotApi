@@ -1,4 +1,6 @@
 ﻿using AzChallangeCalicotApi.Base;
+using AzChallangeCalicotApi.Type.Interfaces;
+using AzChallangeCalicotApi.Type.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -8,19 +10,34 @@ namespace AzChallangeCalicotApi.Controllers
     [ApiController]
     public class CollectionController : ControllerBase
     {
-        [HttpGet("all")]
-        public ActionResult<EnveloppeReponse<List<Models.Product>>> GetAllProducts()
+        private IProductService _productService;
+
+        public CollectionController(IProductService productService)
         {
-            var _productService = new services.ProductService();
-            return new OkObjectResult(new EnveloppeReponse<List<Models.Product>>() { Data = _productService.GetProducts() });
+            _productService = productService;
+        }
+        [HttpGet("all")]
+        public ActionResult<EnveloppeReponse<List<Produit>>> GetAllProducts()
+        {
+            return this.OkAvecEnveloppe(_productService.GetProducts());
         }
 
         [HttpPost]
-        public ActionResult Create(Models.Product product)
+        public ActionResult<EnveloppeReponse<Produit>> Create(Produit product)
         {
-            var _productService = new services.ProductService();
-            _productService.AddProduct(product);
-            return Ok();
+            return this.OkAvecEnveloppe(_productService.AjouterProduit(product));
+        }
+
+        [HttpPut]
+        public ActionResult<EnveloppeReponse<Produit>> Update(Produit product)
+        {
+            return this.OkAvecEnveloppe(_productService.ModifierProduit(product));
+        }
+
+        [HttpDelete]
+        public ActionResult<EnveloppeReponse<bool>> Delete(Produit product)
+        {
+            return this.OkAvecEnveloppe(_productService.SupprimerProduit(product)); 
         }
     }
 }

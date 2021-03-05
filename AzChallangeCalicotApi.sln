@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzChallangeCalicotApi", "AzChallangeCalicotApi\AzChallangeCalicotApi.csproj", "{F3D6E4B0-5EFF-4E7B-9FCC-3A2F2633A1E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzChallangeCalicotApi", "AzChallangeCalicotApi\AzChallangeCalicotApi.csproj", "{F3D6E4B0-5EFF-4E7B-9FCC-3A2F2633A1E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzChallangeCalicotApi.Service", "AzChallangeCalicotApi.Service\AzChallangeCalicotApi.Service.csproj", "{708EAF06-5451-42EC-9997-4030E69E0099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzChallangeCalicotApi.Data", "AzChallangeCalicotApi.Data\AzChallangeCalicotApi.Data.csproj", "{17661055-4796-4739-BFD0-AB4B4321D9C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzChallangeCalicotApi.Type", "AzChallangeCalicotApi.Type\AzChallangeCalicotApi.Type.csproj", "{1F24A307-623F-4140-8331-371E397108C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{F3D6E4B0-5EFF-4E7B-9FCC-3A2F2633A1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3D6E4B0-5EFF-4E7B-9FCC-3A2F2633A1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3D6E4B0-5EFF-4E7B-9FCC-3A2F2633A1E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{708EAF06-5451-42EC-9997-4030E69E0099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{708EAF06-5451-42EC-9997-4030E69E0099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{708EAF06-5451-42EC-9997-4030E69E0099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{708EAF06-5451-42EC-9997-4030E69E0099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17661055-4796-4739-BFD0-AB4B4321D9C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17661055-4796-4739-BFD0-AB4B4321D9C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17661055-4796-4739-BFD0-AB4B4321D9C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17661055-4796-4739-BFD0-AB4B4321D9C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F24A307-623F-4140-8331-371E397108C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F24A307-623F-4140-8331-371E397108C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F24A307-623F-4140-8331-371E397108C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F24A307-623F-4140-8331-371E397108C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
