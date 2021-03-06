@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AzChallangeCalicotApi.Data\AzChallangeCalicotApi.Data.csproj" />
     <ProjectReference Include="..\AzChallangeCalicotApi.Service\AzChallangeCalicotApi.Service.csproj" />
     <ProjectReference Include="..\AzChallangeCalicotApi.Type\AzChallangeCalicotApi.Type.csproj" />
