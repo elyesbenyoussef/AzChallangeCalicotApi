@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -9,9 +10,13 @@ namespace AzChallangeCalicotApi.Data.Entities
     {
         private DbContextOptions<CalicotContext> dbContextOptions;
 
-        public CalicotContext(DbContextOptions<CalicotContext> dbContextOptions)
+        public CalicotContext(DbContextOptions<CalicotContext> dbContextOptions, IConfiguration configuration = null) : base(dbContextOptions)
         {
-            this.dbContextOptions = dbContextOptions;
+            if (configuration != null && configuration.GetValue<bool>("GetToken"))
+            {
+                var conn = (SqlConnection)Database.GetDbConnection();
+                conn.AccessToken = GetToken(configuration).Result;
+            }
         }
 
         public virtual DbSet<Produit> Produit { get; set; }
@@ -49,6 +54,13 @@ namespace AzChallangeCalicotApi.Data.Entities
 
                 entity.Property(e => e.UsagerSuppression).HasMaxLength(128);
             });
+        }
+
+        internal async Task<string> GetToken(IConfiguration configuration)
+        {
+            string userIdentity = configuration.GetValue<string>("UserAssignedIdentity");
+            return await new AzureServiceTokenProvider($"RunAs=App;AppId={userIdentity}").GetAccessTokenAsync(
+                "https://database.windows.net/");
         }
     }
 }

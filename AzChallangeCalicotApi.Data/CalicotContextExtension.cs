@@ -10,14 +10,18 @@ namespace AzChallangeCalicotApi.Data
 {
     public partial class CalicotContextExtension : CalicotContext
     {
-        public CalicotContextExtension(DbContextOptions<CalicotContextExtension> options)
-            : base(ChangeOptionsType<CalicotContext>(options))
+        public CalicotContextExtension(DbContextOptions<CalicotContextExtension> options, IConfiguration configuration = null)
+            : base(ChangeOptionsType<CalicotContext>(options), configuration)
         {
-            var conn = (SqlConnection)Database.GetDbConnection();
+            if (configuration != null && configuration.GetValue<bool>("GetToken"))
+            {
+                var conn = (SqlConnection)Database.GetDbConnection();
+                conn.AccessToken = base.GetToken(configuration).Result;
+            }
         }
 
-        public CalicotContextExtension(DbContextOptions<CalicotContext> options)
-            : base(options)
+        public CalicotContextExtension(DbContextOptions<CalicotContext> options, IConfiguration configuration = null)
+            : base(options, configuration)
         {
         }
 
