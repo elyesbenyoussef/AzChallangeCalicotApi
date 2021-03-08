@@ -1,5 +1,5 @@
 ﻿using AzChallangeCalicotApi.Data.Entities;
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 using Microsoft.Extensions.Configuration;
