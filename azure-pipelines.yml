@@ -15,6 +15,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: NuGetCommand@2
+  inputs:
+    command: custom
+    arguments: sources update -Name "feed_name_match_nameIn_NuGet_Config" -Username "this_value_could_anything" -Password "$(System.AccessToken)" -StorePasswordInClearText -ConfigFile NuGet.Config
+  displayName: 'Authenticate with NuGet feed'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
