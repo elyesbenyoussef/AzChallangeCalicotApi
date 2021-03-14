@@ -15,11 +15,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
   inputs:
     command: 'restore'
+    restoreSolution: '**/*.sln'
     feedsToUse: 'select'
-    vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+    vstsFeed: '3a20d12c-279b-449f-8f43-2011f02dd33a'
  
 - task: DotNetCoreCLI@2
   inputs:
