@@ -1,6 +1,8 @@
 using AutoMapper;
 using AzChallangeCalicotApi.Data;
+using AzChallangeCalicotApi.Service;
 using AzChallangeCalicotApi.services;
+using AzChallangeCalicotApi.Type;
 using AzChallangeCalicotApi.Type.Helpers;
 using AzChallangeCalicotApi.Type.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +34,7 @@ namespace AzChallangeCalicotApi
             services.AddDbContext<CalicotContextExtension>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+            services.AddSingleton(_config);
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -45,6 +48,7 @@ namespace AzChallangeCalicotApi
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IDataService, DataService>();
+            services.AddScoped<IBlobStorageService, BlobStorageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

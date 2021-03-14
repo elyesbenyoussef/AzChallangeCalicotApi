@@ -16,10 +16,17 @@ namespace AzChallangeCalicotApi.Controllers
         {
             _productService = productService;
         }
+        
         [HttpGet("all")]
         public ActionResult<EnveloppeReponse<List<Produit>>> GetAllProducts()
         {
             return this.OkAvecEnveloppe(_productService.GetProducts());
+        }
+
+        [HttpGet("actifs")]
+        public ActionResult<EnveloppeReponse<List<Produit>>> GetAllProductsActifs()
+        {
+            return this.OkAvecEnveloppe(_productService.GetProductsActifs());
         }
 
         [HttpPost]

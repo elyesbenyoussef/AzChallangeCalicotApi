@@ -7,6 +7,6 @@
         public string Description { get; set; }
         public decimal Prix { get; set; }
         public string ImageSrc { get; set; }
-        public bool IndActive { get; set; }
+        public bool IndActive { get; set; } = true;
     }
 }

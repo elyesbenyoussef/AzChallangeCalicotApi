@@ -19,6 +19,12 @@ namespace AzChallangeCalicotApi.services
             return products;
         }
 
+        public List<Produit> GetProductsActifs()
+        {
+            var products = _dataService.ObtenirListeProduitsActives();
+            return products;
+        }
+
         public Produit AjouterProduit(Produit product)
         {
             return _dataService.AjouterProduit(product);

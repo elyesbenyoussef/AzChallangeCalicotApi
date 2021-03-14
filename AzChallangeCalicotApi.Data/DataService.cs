@@ -25,6 +25,13 @@ namespace AzChallangeCalicotApi.Data
             return _mapper.Map<List<MODELS.Produit>>(products);
         }
 
+        public List<MODELS.Produit> ObtenirListeProduitsActives()
+        {
+            var products = _context.Produit.Actifs().Where(x => x.IndActive).ToList();
+
+            return _mapper.Map<List<MODELS.Produit>>(products);
+        }
+
         public MODELS.Produit AjouterProduit(MODELS.Produit product)
         {
             var entity = _mapper.Map<Entities.Produit>(product);
