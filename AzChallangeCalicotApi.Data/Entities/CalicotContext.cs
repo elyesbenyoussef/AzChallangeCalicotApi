@@ -20,6 +20,7 @@ namespace AzChallangeCalicotApi.Data.Entities
         }
 
         public virtual DbSet<Produit> Produit { get; set; }
+        public virtual DbSet<Image> Image { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,7 +37,8 @@ namespace AzChallangeCalicotApi.Data.Entities
 
                 entity.Property(e => e.ProduitId).HasColumnName("ProductId");
 
-                entity.Property(e => e.DateHeureCreation).HasColumnType("datetime");
+                entity.Property(e => e.DateHeureCreation).HasColumnType("datetime")
+                .HasDefaultValueSql("(GETDATE())");
 
                 entity.Property(e => e.DateHeureModification).HasColumnType("datetime");
 
@@ -48,11 +50,46 @@ namespace AzChallangeCalicotApi.Data.Entities
 
                 entity.Property(e => e.UsagerCreation)
                     .IsRequired()
-                    .HasMaxLength(128);
+                    .HasMaxLength(128)
+                    .HasDefaultValue("defaultuser");
 
                 entity.Property(e => e.UsagerModification).HasMaxLength(128);
 
                 entity.Property(e => e.UsagerSuppression).HasMaxLength(128);
+            });
+
+            modelBuilder.Entity<Image>(entity =>
+            {
+                entity.ToTable("Image");
+
+                entity.Property(e => e.ImageId).HasColumnName("ImageId");
+
+                entity.Property(e => e.ProduitId).HasColumnName("ProductId");
+
+                entity.Property(e => e.DateHeureCreation).HasColumnType("datetime")
+                .HasDefaultValueSql("(GETDATE())");
+
+                entity.Property(e => e.DateHeureModification).HasColumnType("datetime");
+
+                entity.Property(e => e.DateHeureSuppression).HasColumnType("datetime");
+
+                entity.Property(e => e.NumeroUniqueGUID)
+                    .HasColumnName("NumeroUniqueGUID")
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.UsagerCreation)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasDefaultValue("defaultuser");
+
+                entity.Property(e => e.UsagerModification).HasMaxLength(128);
+
+                entity.Property(e => e.UsagerSuppression).HasMaxLength(128);
+
+                entity.HasOne(p => p.Produit)
+                .WithMany(i => i.Images)
+                .HasForeignKey(c => c.ProduitId)
+                .HasConstraintName("FK_ImageProduit");
             });
         }
 

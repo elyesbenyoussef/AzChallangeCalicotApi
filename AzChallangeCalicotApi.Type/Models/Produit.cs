@@ -1,4 +1,6 @@
-﻿namespace AzChallangeCalicotApi.Type.Models
+﻿using System.Collections.Generic;
+
+namespace AzChallangeCalicotApi.Type.Models
 {
     public class Produit : ModelBase
     {
@@ -8,5 +10,6 @@
         public decimal Prix { get; set; }
         public string ImageSrc { get; set; }
         public bool IndActive { get; set; } = true;
+        public List<Image> Images { get; set; }
     }
 }

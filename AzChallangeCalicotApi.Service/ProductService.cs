@@ -27,7 +27,15 @@ namespace AzChallangeCalicotApi.services
 
         public Produit AjouterProduit(Produit product)
         {
-            return _dataService.AjouterProduit(product);
+            var produit = _dataService.AjouterProduit(product);
+            foreach (var image in product.Images)
+            {
+                image.ProduitId = produit.ProduitId;
+                _dataService.AjouterImage(image);
+            }
+
+            return _dataService.ObtenirProduit(produit.ProduitId);
+            
         }
 
         public Produit ModifierProduit(Produit produit)

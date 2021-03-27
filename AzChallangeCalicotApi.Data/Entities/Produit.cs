@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace AzChallangeCalicotApi.Data.Entities
 {
@@ -12,5 +10,6 @@ namespace AzChallangeCalicotApi.Data.Entities
         public decimal Prix { get; set; }
         public string ImageSrc { get; set; }
         public bool IndActive { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

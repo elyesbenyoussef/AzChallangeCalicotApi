@@ -33,7 +33,8 @@ namespace AzChallangeCalicotApi
 
             services.AddDbContext<CalicotContextExtension>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSingleton(_config);
 
             var mappingConfig = new MapperConfiguration(mc =>

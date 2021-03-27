@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AzChallangeCalicotApi.Data.Extensions;
 using AzChallangeCalicotApi.Type.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using MODELS = AzChallangeCalicotApi.Type.Models;
@@ -20,14 +21,18 @@ namespace AzChallangeCalicotApi.Data
 
         public List<MODELS.Produit> ObtenirListeProduits()
         {
-            var products = _context.Produit.Actifs().ToList();
+            var products = _context.Produit.Include(x => x.Images).Actifs().ToList();
 
             return _mapper.Map<List<MODELS.Produit>>(products);
         }
 
         public List<MODELS.Produit> ObtenirListeProduitsActives()
         {
-            var products = _context.Produit.Actifs().Where(x => x.IndActive).ToList();
+            var products = _context.Produit
+                .Include(x => x.Images)
+                .Actifs()
+                .Where(x => x.IndActive)
+                .ToList();
 
             return _mapper.Map<List<MODELS.Produit>>(products);
         }
@@ -55,12 +60,19 @@ namespace AzChallangeCalicotApi.Data
 
         public MODELS.Produit ObtenirProduit(int produitId)
         {
-            var entity = _context.Produit.Actifs().FirstOrDefault(x => x.ProduitId == produitId);
+            var entity = _context.Produit.Include(x => x.Images).Actifs().FirstOrDefault(x => x.ProduitId == produitId);
             if(entity != null)
             {
                 DetachedEntity(entity);
             }
             return _mapper.Map<MODELS.Produit>(entity);
+        }
+
+        public MODELS.Image AjouterImage(MODELS.Image image)
+        {
+            var entity = _mapper.Map<Entities.Image>(image);
+            entity = Add(entity);
+            return _mapper.Map<MODELS.Image>(entity);
         }
     }
 }

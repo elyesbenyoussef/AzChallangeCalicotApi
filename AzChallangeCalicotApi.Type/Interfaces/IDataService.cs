@@ -11,5 +11,6 @@ namespace AzChallangeCalicotApi.Type.Interfaces
         Produit ModifierProduit(Produit produit);
         bool SupprimerProduit(Produit produit);
         Produit ObtenirProduit(int produitId);
+        Image AjouterImage(Image image);
     }
 }
