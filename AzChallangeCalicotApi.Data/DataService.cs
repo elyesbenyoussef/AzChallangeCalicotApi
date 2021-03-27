@@ -52,5 +52,15 @@ namespace AzChallangeCalicotApi.Data
              Delete(entity);
             return _context.SaveChanges() > 0;
         }
+
+        public MODELS.Produit ObtenirProduit(int produitId)
+        {
+            var entity = _context.Produit.Actifs().FirstOrDefault(x => x.ProduitId == produitId);
+            if(entity != null)
+            {
+                DetachedEntity(entity);
+            }
+            return _mapper.Map<MODELS.Produit>(entity);
+        }
     }
 }

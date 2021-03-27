@@ -29,6 +29,12 @@ namespace AzChallangeCalicotApi.Controllers
             return this.OkAvecEnveloppe(_productService.GetProductsActifs());
         }
 
+        [HttpGet("{produitId}")]
+        public ActionResult<EnveloppeReponse<Produit>> GetProductDetail(int produitId)
+        {
+            return this.OkAvecEnveloppe(_productService.GetProduct(produitId));
+        }
+
         [HttpPost]
         public ActionResult<EnveloppeReponse<Produit>> Create(Produit product)
         {

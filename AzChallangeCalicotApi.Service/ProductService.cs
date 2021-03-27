@@ -39,6 +39,11 @@ namespace AzChallangeCalicotApi.services
         {
             return _dataService.SupprimerProduit(produit);
         }
+
+        public Produit GetProduct(int produitId)
+        {
+            return _dataService.ObtenirProduit(produitId);
+        }
     }
 
 }
