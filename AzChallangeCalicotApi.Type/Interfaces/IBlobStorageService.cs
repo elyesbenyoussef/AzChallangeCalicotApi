@@ -10,5 +10,6 @@ namespace AzChallangeCalicotApi.Type.Interfaces
         Task<Uri> UploadFileBlobAsync(Stream content, string contentType, string fileName);
         string GetDownloadUrl(string fileName);
         Stream Download(string fileName);
+        void CreateThumb(string fileName);
     }
 }

@@ -7,10 +7,12 @@ namespace AzChallangeCalicotApi.services
     public class ProductService : IProductService
     {
         private IDataService _dataService;
+        private IBlobStorageService _blobStorageService;
 
-        public ProductService(IDataService dataService)
+        public ProductService(IDataService dataService, IBlobStorageService blobStorageService)
         {
             _dataService = dataService;
+            _blobStorageService = blobStorageService;
         }
 
         public List<Produit> GetProducts()
@@ -32,6 +34,9 @@ namespace AzChallangeCalicotApi.services
             {
                 image.ProduitId = produit.ProduitId;
                 _dataService.AjouterImage(image);
+
+                // Create thumb
+                _blobStorageService.CreateThumb(image.Nom);
             }
 
             return _dataService.ObtenirProduit(produit.ProduitId);

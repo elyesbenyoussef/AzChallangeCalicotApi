@@ -5,6 +5,7 @@ using Azure.Storage.Blobs.Models;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AzChallangeCalicotApi.Service
 {
@@ -46,6 +47,47 @@ namespace AzChallangeCalicotApi.Service
             BlobClient blobClient = _containerClient.GetBlobClient(blobName: fileName);
             BlobDownloadInfo blobDownloadInfo = blobClient.Download();
             return blobDownloadInfo.Content;
+        }
+
+        public void CreateThumb(string fileName)
+        {
+            using (var ms = Download(fileName))
+            {
+                var image = Image.FromStream(ms);
+
+                // calculate a 150px thumbnail
+                int width;
+                int height;
+                if (image.Width > image.Height)
+                {
+                    width = 150;
+                    height = 150 * image.Height / image.Width;
+                }
+                else
+                {
+                    height = 150;
+                    width = 150 * image.Width / image.Height;
+                }
+
+                // generate the thumb
+                var thumb = image.GetThumbnailImage(
+                    width,
+                    height,
+                    () => false,
+                    IntPtr.Zero);
+
+                // save it off to blob storage
+                using (var thumbStream = new MemoryStream())
+                {
+                    thumb.Save(
+                        thumbStream,
+                        System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                    thumbStream.Position = 0; // reset;
+
+                    UploadFileToBlob(thumbStream, Path.Combine("thumb", fileName));
+                }
+            }
         }
     }
 }
